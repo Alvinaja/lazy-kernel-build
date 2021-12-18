@@ -62,16 +62,24 @@ export HASH_HEAD=$(git rev-parse --short HEAD)
 export COMMIT_HEAD=$(git log --oneline -1)
 make -j$(nproc) O=out ARCH=arm64 $KERNEL_DEFCONFIG
 make -j$(nproc) ARCH=arm64 O=out \
+    LD_LIBRARY_PATH="${ClangPath}/lib64:${LD_LIBRARY_PATH}" \
     CC=clang \
+    AS=llvm-as \
+    NM=llvm-nm \
+    CXX=clang++ \
     AR=llvm-ar \
     LD=ld.lld \
-    NM=llvm-nm \
+    STRIP=llvm-strip \
     OBJCOPY=llvm-objcopy \
     OBJDUMP=llvm-objdump \
-    STRIP=llvm-strip \
-    CROSS_COMPILE=aarch64-linux-android- \
-    CROSS_COMPILE_ARM32=arm-linux-androideabi- \
-    CLANG_TRIPLE=aarch64-linux-gnu-
+    OBJSIZE=llvm-size \
+    READELF=llvm-readelf \
+    CLANG_TRIPLE=aarch64-linux-gnu- \
+    CROSS_COMPILE=aarch64-linux-gnu- \
+    HOSTAR=llvm-ar \
+    HOSTAS=llvm-as \
+    HOSTLD=ld.lld \
+    CROSS_COMPILE_ARM32=arm-linux-gnueabi-
 
    if ! [ -a "$IMAGE" ]; then
 	finerr
