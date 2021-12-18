@@ -63,23 +63,23 @@ export COMMIT_HEAD=$(git log --oneline -1)
 make -j$(nproc) O=out ARCH=arm64 $KERNEL_DEFCONFIG
 make -j$(nproc) ARCH=arm64 O=out \
     LD_LIBRARY_PATH="${ClangPath}/lib64:${LD_LIBRARY_PATH}" \
-    CC=clang \
-    AS=llvm-as \
-    NM=llvm-nm \
-    CXX=clang++ \
-    AR=llvm-ar \
-    LD=ld.lld \
-    STRIP=llvm-strip \
-    OBJCOPY=llvm-objcopy \
-    OBJDUMP=llvm-objdump \
-    OBJSIZE=llvm-size \
-    READELF=llvm-readelf \
+    CC=${ClangPath}/bin/clang \
+    AS=${ClangPath}/bin/llvm-as \
+    NM=${ClangPath}/bin/llvm-nm \
+    CXX=${ClangPath}/bin/clang++ \
+    AR=${ClangPath}/bin/llvm-ar \
+    LD=${ClangPath}/bin/ld.lld \
+    STRIP=${ClangPath}/bin/llvm-strip \
+    OBJCOPY=${ClangPath}/bin/llvm-objcopy \
+    OBJDUMP=${ClangPath}/bin/llvm-objdump \
+    OBJSIZE=${ClangPath}/bin/llvm-size \
+    READELF=${ClangPath}/bin/llvm-readelf \
+    CROSS_COMPILE=aarch64-linux-android- \
+    CROSS_COMPILE_ARM32=arm-linux-androideabi- \
     CLANG_TRIPLE=aarch64-linux-gnu- \
-    CROSS_COMPILE=aarch64-linux-gnu- \
-    HOSTAR=llvm-ar \
-    HOSTAS=llvm-as \
-    HOSTLD=ld.lld \
-    CROSS_COMPILE_ARM32=arm-linux-gnueabi-
+    HOSTAR=${ClangPath}/bin/llvm-ar \
+    HOSTAS=${ClangPath}/bin/llvm-as \
+    HOSTLD=${ClangPath}/bin/ld.lld 
 
    if ! [ -a "$IMAGE" ]; then
 	finerr
