@@ -63,7 +63,7 @@ export COMMIT_HEAD=$(git log --oneline -1)
 make -j$(nproc) O=out ARCH=arm64 $KERNEL_DEFCONFIG
 make -j$(nproc) ARCH=arm64 O=out \
     CC=clang \
-    AS=llvm-as \
+    AR=llvm-ar \
     LD=ld.lld \
     NM=llvm-nm \
     OBJCOPY=llvm-objcopy \
