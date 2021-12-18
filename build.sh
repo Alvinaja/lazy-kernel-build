@@ -34,15 +34,13 @@ KERNEL_ROOTDIR=$(pwd)/$DEVICE_CODENAME # IMPORTANT ! Fill with your kernel sourc
 export KERNELNAME=KucingKernel
 export KBUILD_BUILD_USER=kucingabu # Change with your own name or else.
 export KBUILD_BUILD_HOST=serverlelet # Change with your own hostname.
-IMAGE=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz
+IMAGE=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
 CLANG_VER="$("$ClangPath"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$ClangPath"/bin/ld.lld --version | head -n 1)"
 export KBUILD_COMPILER_STRING="$CLANG_VER with $LLD_VER"
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
 PATH=${ClangPath}/bin:${GCCaPath}/bin:${GCCbPath}/bin:${PATH}
-DTB=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/dts/mediatek/mt6768.dtb
-DTBO=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/dtbo.img
 
 # Telegram
 export BOT_MSG_URL="https://api.telegram.org/bot$TG_TOKEN/sendMessage"
@@ -79,7 +77,9 @@ make -j$(nproc) ARCH=arm64 O=out \
     CLANG_TRIPLE=aarch64-linux-gnu- \
     HOSTAR=${ClangPath}/bin/llvm-ar \
     HOSTAS=${ClangPath}/bin/llvm-as \
-    HOSTLD=${ClangPath}/bin/ld.lld 
+    HOSTLD=${ClangPath}/bin/ld.lld \
+    HOSTCC=${ClangPath}/bin/clang \
+    HOSTCXX=${ClangPath}/bin/clang++
 
    if ! [ -a "$IMAGE" ]; then
 	finerr
@@ -87,8 +87,6 @@ make -j$(nproc) ARCH=arm64 O=out \
    fi
   git clone --depth=1 $ANYKERNEL AnyKernel
 	cp $IMAGE AnyKernel
-        cp $DTBO AnyKernel
-        mv $DTB AnyKernel/dtb
 }
 # Push kernel to channel
 function push() {
