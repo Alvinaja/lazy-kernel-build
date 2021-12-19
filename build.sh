@@ -104,7 +104,7 @@ function finerr() {
         -d chat_id="$TG_CHAT_ID" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=markdown" \
-        -d text="Build throw an error(s)"
+        -d text="Maaf kakak,build nya gagal,mungkin kurang tamvan"
     exit 1
 }
 
