@@ -62,7 +62,6 @@ make -j$(nproc) O=out ARCH=arm64 $KERNEL_DEFCONFIG
 make -j$(nproc) ARCH=arm64 O=out \
     LD_LIBRARY_PATH="${ClangPath}/lib64:${LD_LIBRARY_PATH}" \
     CC=${ClangPath}/bin/clang \
-    AS=${ClangPath}/bin/llvm-as \
     NM=${ClangPath}/bin/llvm-nm \
     CXX=${ClangPath}/bin/clang++ \
     AR=${ClangPath}/bin/llvm-ar \
@@ -76,7 +75,6 @@ make -j$(nproc) ARCH=arm64 O=out \
     CROSS_COMPILE_ARM32=arm-linux-androideabi- \
     CLANG_TRIPLE=aarch64-linux-gnu- \
     HOSTAR=${ClangPath}/bin/llvm-ar \
-    HOSTAS=${ClangPath}/bin/llvm-as \
     HOSTLD=${ClangPath}/bin/ld.lld \
     HOSTCC=${ClangPath}/bin/clang \
     HOSTCXX=${ClangPath}/bin/clang++
