@@ -109,7 +109,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 $KERNELNAME-$DEVICE_CODENAME-$DATE.zip *
+    zip -r9 [CLANG][$DEVICE_CODENAME]4.14.259-$KERNELNAME.zip *
     cd ..
 }
 compile
