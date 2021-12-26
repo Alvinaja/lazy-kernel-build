@@ -102,7 +102,7 @@ function finerr() {
         -d chat_id="$TG_CHAT_ID" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=markdown" \
-        -d text="Maaf kakak,build nya gagal,mungkin kurang tamvan"
+        -d text="Aku sudah lelah compile kernel,Dan aku memilih menyerah ;("
     exit 1
 }
 
