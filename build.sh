@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (C) 2021 a kucingabu property
+# Copyright (C) 2021 a alvin property
 #
 
 # Main
@@ -31,9 +31,9 @@ tar -xf gcc32.tar.gz -C $GCCbPath
 
 #Main2
 KERNEL_ROOTDIR=$(pwd)/$DEVICE_CODENAME # IMPORTANT ! Fill with your kernel source root directory.
-export KERNELNAME=KucingKernel
-export KBUILD_BUILD_USER=kucingabu # Change with your own name or else.
-export KBUILD_BUILD_HOST=serverlelet # Change with your own hostname.
+export KERNELNAME=RTX-2080-TI
+export KBUILD_BUILD_USER=alvin # Change with your own name or else.
+export KBUILD_BUILD_HOST=GitHub # Change with your own hostname.
 IMAGE=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
 CLANG_VER="$("$ClangPath"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$ClangPath"/bin/ld.lld --version | head -n 1)"
